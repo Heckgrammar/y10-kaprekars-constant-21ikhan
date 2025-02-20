@@ -18,36 +18,50 @@ namespace Y10_Challenge_Kaprikars_Constant
 
             Console.WriteLine("Hello, Type a four-digit number:");
             string x = Console.ReadLine();
+            int iterations = 0;
 
-            // Convert input to character array
-            char[] myarr = x.ToCharArray();
-            bool anysorts = true;
-            char temp = ' ';
-
-            // Bubble sort in descending order
-            while (anysorts)
+            while (x != "6174")
             {
-                anysorts = false;
-                for (int i = 0; i < myarr.Length - 1; i++)
+                // Convert input to character array
+                char[] myarr = x.ToCharArray();
+                bool anysorts = true;
+                char temp = ' ';
+
+                // Bubble sort in descending order
+                while (anysorts)
                 {
-                    if (myarr[i] < myarr[i + 1])
+                    anysorts = false;
+                    for (int i = 0; i < myarr.Length - 1; i++)
                     {
-                        temp = myarr[i];
-                        myarr[i] = myarr[i + 1];
-                        myarr[i + 1] = temp;
-                        anysorts = true;
+                        if (myarr[i] < myarr[i + 1])
+                        {
+                            temp = myarr[i];
+                            myarr[i] = myarr[i + 1];
+                            myarr[i + 1] = temp;
+                            anysorts = true;
+                        }
                     }
                 }
+
+                // Reverse the sorted array
+                char[] myarrReverse = myarr.Reverse().ToArray();
+                string xReverse = new string(myarrReverse);
+                string xNotAnArr = new string(myarr);
+
+                // Convert to integers and subtract
+                int num1 = Convert.ToInt32(xNotAnArr);
+                int num2 = Convert.ToInt32(xReverse);
+                x = (num1 - num2).ToString("D4");
+
+                // Output the calculation step
+                Console.WriteLine($"{num1} - {num2} = {x}");
+
+                // Increment iteration count
+                iterations++;
             }
 
-            // Reverse the sorted array
-            char[] myarrReverse = myarr.Reverse().ToArray();
-            string xReverse = new string(myarrReverse);
-            string xNotAnArr = new string(myarr);
-            // Print the sorted array and the reversed array
-            Console.WriteLine("Sorted in descending order: " + xNotAnArr);
-            Console.WriteLine("Reversed order: " + xReverse);
-            x = Convert.ToString(Convert.ToInt32(xReverse) - Convert.ToInt32(xNotAnArr));
+            // Print the result
+            Console.WriteLine($"Kaprekar's constant 6174 reached in {iterations} iterations.");
         }
     }
 }
